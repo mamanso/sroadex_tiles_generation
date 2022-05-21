@@ -1,0 +1,144 @@
+MAP
+# Set enviroment variables
+#  CONFIG "PROJ_LIB" "C:\\Program Files\\mapserver\\proj\\SHARE"
+#  CONFIG "GDAL_DATA" "C:\\Program Files\\mapserver\\gdal-data"
+
+  DEFRESOLUTION 96
+  EXTENT 518085 4696856 520547 4698255
+
+  IMAGETYPE "png24"
+  NAME "0203"
+  RESOLUTION 96
+  SHAPEPATH ""
+  SIZE 256 256
+  STATUS ON
+
+  UNITS METERS
+
+  OUTPUTFORMAT
+    NAME "png24"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+  END # OUTPUTFORMAT
+
+  OUTPUTFORMAT
+    NAME "print"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+  END # OUTPUTFORMAT
+
+  PROJECTION
+    "proj=utm"
+    "zone=30"
+    "ellps=GRS80"
+    "towgs84=0,0,0,0,0,0,0"
+    "units=m"
+    "no_defs"
+  END # PROJECTION
+  LEGEND
+    KEYSIZE 20 10
+    KEYSPACING 5 5
+    LABEL
+      SIZE 10
+      OFFSET 0 0
+      SHADOWSIZE 1 1
+    END # LABEL
+    STATUS OFF
+  END # LEGEND
+
+  QUERYMAP
+    SIZE -1 -1
+    STATUS OFF
+    STYLE HILITE
+  END # QUERYMAP
+
+  SCALEBAR
+    INTERVALS 4
+    LABEL
+      SIZE 10
+      OFFSET 0 0
+      SHADOWSIZE 1 1
+    END # LABEL
+    SIZE 200 3
+    STATUS OFF
+    UNITS MILES
+  END # SCALEBAR
+
+  WEB
+    METADATA
+      "wms_srs"	"EPSG:4258 EPSG:4326 EPSG:25830 EPSG:25829 EPSG:25831"
+      "wms_contactposition"	"owner"
+      "wms_enable_request"	"*"
+      "wms_abstract"	"WMS service "
+      "distance_units"	"MS_METERS"
+      "wms_contactorganization"	"MERCATOR Research GROUP UPM-ETSI Topografia, Geodesia y Cartografia"
+      "coordsys_name"	"ETRS89 / UTM zone 30N"
+      "wms_fees"	"conditions unknown"
+      "wms_accessconstraints"	"None"
+      "wms_title"	"WMS Mapscript"
+    END # METADATA
+  END # WEB
+
+  LAYER
+    COMPOSITE
+    END # COMPOSITE
+    DATA "0203_epsg25830_05m.tif"
+    EXTENT 
+    METADATA
+      "wms_srs"	"EPSG:25830"
+      "coordsys_name"	"ETRS89 / UTM zone 30N"
+      "wms_title"	"orthoimage"
+    END # METADATA
+    NAME "ortho"
+    PROJECTION
+      "proj=utm"
+      "zone=30"
+      "ellps=GRS80"
+      "towgs84=0,0,0,0,0,0,0"
+      "units=m"
+      "no_defs"
+    END # PROJECTION
+    STATUS OFF
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+
+  LAYER
+    DATA "0203_axis.shp"
+    METADATA
+      "wms_srs"	"EPSG:25830"
+      "coordsys_name"	"ETRS89 / UTM zone 30N"
+    END # METADATA
+    NAME "viales"
+    PROJECTION
+      "proj=utm"
+      "zone=30"
+      "ellps=GRS80"
+      "towgs84=0,0,0,0,0,0,0"
+      "units=m"
+      "no_defs"
+    END # PROJECTION
+    STATUS ON
+    TEMPLATE "query.html"
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME "default"
+      STYLE
+        COLOR 0 0 0
+        WIDTH 12
+      END
+    END	
+  END # LAYER
+
+END  # MAP
+
+END # MAP
