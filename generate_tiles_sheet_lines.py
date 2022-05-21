@@ -9,8 +9,8 @@ import time, glob, math
 
 gdal_env = os.environ.copy()
 # Set enviromental variables about GDAL to use OGR Coordinate transformations
-gdal_env["GDAL_DATA"] = '\\miniconda3\\envs\\mapscript2\\Library\\share'
-gdal_env['PROJ_LIB'] = '\\miniconda3\\envs\\mapscript2\\Library\\share\\proj'
+#gdal_env["GDAL_DATA"] = '\\miniconda3\\envs\\mapscript2\\Library\\share'
+#gdal_env['PROJ_LIB'] = '\\miniconda3\\envs\\mapscript2\\Library\\share\\proj'
 
 # Default output folder name
 imgsFolder = 'tiles'
@@ -127,16 +127,14 @@ if __name__ == '__main__':
     bymaxarea = bymax - 128 * resolucion
        
     resolucion2 = resolucion
-    resolucion_2 = resolucion2 / 2
 
-
-    filas = int(round_down((bymax - bymin)/(resolucion2 * img_height))) * 2 # antes 256 para resolucion original
-    columnas = int(round_down((bxmax - bxmin)/(resolucion2 * img_width))) * 2
+    filas = int(round_down((bymax - bymin)/(resolucion2 * img_height))) 
+    columnas = int(round_down((bxmax - bxmin)/(resolucion2 * img_width))) 
 
     print("Rows: " , filas, ", Columns: ", columnas)
 
-    filasarea = int(round_down((bymaxarea - byminarea)/(resolucion2 * img_height))) * 2
-    columnasarea = int(round_down((bxmaxarea - bxminarea)/(resolucion2 * img_width))) * 2
+    filasarea = int(round_down((bymaxarea - byminarea)/(resolucion2 * img_height))) 
+    columnasarea = int(round_down((bxmaxarea - bxminarea)/(resolucion2 * img_width)))
    
     print("Area Rows: " , filasarea, ", Area Columns: ", columnasarea)
 
@@ -163,9 +161,9 @@ if __name__ == '__main__':
     for i in range(0, filasarea - 1):
         start_timef = time.time()  
         for j in range(0, columnasarea - 1):
-            xmin = bxminarea + j * img_width * resolucion_2
+            xmin = bxminarea + j * img_width * resolucion2
             xmax = xmin + img_width * resolucion2
-            ymax = bymaxarea - i * img_height * resolucion_2
+            ymax = bymaxarea - i * img_height * resolucion2
             ymin = ymax - img_height * resolucion2
             lyr.SetSpatialFilterRect(xmin, ymin, xmax, ymax )
             SumaLongitudes = 0
